@@ -8,7 +8,7 @@ import {
   YellowBox,
   Button
 } from 'react-native';
-
+import Footer from './src/components/Footer';
 import Form from './src/components/Form';
 import colors from './src/utils/colors';
 
@@ -20,7 +20,7 @@ export default function App() {
   const [interest, setInterest] = useState(null);
   const [months, setMonths] = useState(null);
 
-  const onSubmit = () => {
+  const calculate = () => {
     console.log('capital -> ', capital);
     console.log('interest -> ', interest);
     console.log('months -> ', months);
@@ -40,13 +40,7 @@ export default function App() {
       <View>
         <Text>Resultado</Text>
       </View>
-      <View>
-        <Button
-          title='Enviar'
-          onPress={onSubmit}
-        />
-        <Text>Footer</Text>
-      </View>
+      <Footer calculate={calculate} />
     </>
   );
 }
