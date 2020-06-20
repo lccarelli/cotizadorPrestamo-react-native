@@ -19,12 +19,26 @@ export default function App() {
   const [capital, setCapital] = useState(null);
   const [interest, setInterest] = useState(null);
   const [months, setMonths] = useState(null);
+  const [total, settotal] = useState(null);
+  console.log('total->', total);
 
   const calculate = () => {
-    console.log('capital -> ', capital);
-    console.log('interest -> ', interest);
-    console.log('months -> ', months);
-  }
+    if (!capital) {
+      console.log('Añade la cantidad de capital');
+    } else if (!interest) {
+      console.log('Añade el interés');
+    } else if (!months) {
+      console.log('Selecciona los meses a pagar');
+    } else {
+      const i = interest / 100;
+      const fee = capital / ((1 - Math.pow(i + 1, -months)) / i);
+      settotal({
+        monthlyFree: fee.toFixed(2).replace('.', ','),
+        totalPayable: (fee * months).toFixed(2).replace('.', ','),
+      });
+      console.log('totalPayable->', (fee * months).toFixed(2).replace('.', ','));
+    }
+  };
 
   return (
     <>
