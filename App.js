@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
@@ -23,6 +23,10 @@ export default function App() {
   const [total, setTotal] = useState(null);
   const [errorMessage, seterrorMessag] = useState('');
   console.log('total->', total);
+
+  useEffect(() => {
+    (capital && interest && months) ? calculate() : reset();
+  }, [capital, interest, months])
 
   const calculate = () => {
     reset();
