@@ -11,6 +11,7 @@ import {
 import Footer from './src/components/Footer';
 import Form from './src/components/Form';
 import colors from './src/utils/colors';
+import ResultCalculation from './src/components/ResultCalculation';
 
 YellowBox.ignoreWarnings(['Picker has been extracted']);
 
@@ -19,25 +20,32 @@ export default function App() {
   const [capital, setCapital] = useState(null);
   const [interest, setInterest] = useState(null);
   const [months, setMonths] = useState(null);
-  const [total, settotal] = useState(null);
+  const [total, setTotal] = useState(null);
+  const [errorMessage, seterrorMessag] = useState('');
   console.log('total->', total);
 
   const calculate = () => {
+    reset();
     if (!capital) {
-      console.log('Añade la cantidad de capital');
+      seterrorMessag('Añade la cantidad de capital');
     } else if (!interest) {
-      console.log('Añade el interés');
+      seterrorMessag('Añade el interés');
     } else if (!months) {
-      console.log('Selecciona los meses a pagar');
+      seterrorMessag('Selecciona los meses a pagar');
     } else {
       const i = interest / 100;
       const fee = capital / ((1 - Math.pow(i + 1, -months)) / i);
-      settotal({
+      setTotal({
         monthlyFree: fee.toFixed(2).replace('.', ','),
         totalPayable: (fee * months).toFixed(2).replace('.', ','),
       });
       console.log('totalPayable->', (fee * months).toFixed(2).replace('.', ','));
     }
+  };
+
+  const reset = () => {
+    seterrorMessag("");
+    setTotal(null);
   };
 
   return (
@@ -51,9 +59,13 @@ export default function App() {
           setInterest={setInterest}
           setMonths={setMonths} />
       </SafeAreaView>
-      <View>
-        <Text>Resultado</Text>
-      </View>
+      <ResultCalculation
+        errorMessage={errorMessage}
+        capital={capital}
+        interest={interest}
+        months={months}
+        total={total}
+      />
       <Footer calculate={calculate} />
     </>
   );
@@ -75,9 +87,9 @@ const styles = StyleSheet.create({
     zIndex: -1
   },
   titleApp: {
-    fontSize: 25,
+    fontSize: 33,
     fontWeight: 'bold',
-    marginTop: 25,
+    marginTop: 40,
     color: colors.WHITE
   }
 })
