@@ -78,12 +78,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   safeArea: {
-    height: 290,
+    height: 320,
     alignItems: 'center',
   },
   background: {
     backgroundColor: colors.PRIMARY_COLOR,
-    height: 200,
+    height: 270,
     width: '100%',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   titleApp: {
     fontSize: 33,
     fontWeight: 'bold',
-    marginTop: 40,
+    marginTop: 30,
     color: colors.WHITE
   }
 })
